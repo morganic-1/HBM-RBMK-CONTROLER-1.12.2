@@ -19,7 +19,7 @@ end
 
 scriptPhase = "pre-ini"
 
-local component = require("component")
+local component = require("component")  
 local event = require("event")
 local term = require("term")
 local os = require("os")
@@ -114,8 +114,8 @@ while true do
     AvfuelColumnTemp = averageTable(fuelColunmHeat)
     AvBoilerColunmTemp = averageTable(boilersHeat)
 
-   gpu.set(10,10, AvfuelCoreTemp) 
-   gpu.set(20,20, AvfuelColumnTemp)
-   gpu.set(30,30, AvfuelCoreTemp)
-   gpu.set(40,40, fuelColunmHeat)
+    gpu.set(10,10, AvfuelCoreTemp) 
+    gpu.set(20,20, AvfuelColumnTemp)
+    gpu.set(30,30, AvfuelCoreTemp)
+    gpu.set(40,40, fuelColunmHeat)
 end
