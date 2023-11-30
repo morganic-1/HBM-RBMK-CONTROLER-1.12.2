@@ -120,12 +120,11 @@ while true do
         table.insert(boilerTemp, data.hullTemp)
     end
 
-    averageTable(fuelRodCoreTemp, AvfuelCoreTemp)
-    averageTable(fuelColunmHeat, AvfuelColumnTemp)
-    averageTable(boilersHeat)
-
-    gpu.set(10,10, AvfuelCoreTemp) 
-    gpu.set(20,20, AvfuelColumnTemp)
-    gpu.set(30,30, AvfuelCoreTemp)
-    gpu.set(40,40, fuelColunmHeat)
+    averageTable(fuelRodCoreTemp, averageCoreTemp)
+    gpu.set(10,10, averageCoreTemp) 
+    averageTable(fuelRodColumnTemp, averageFuelColumnTemp)
+    gpu.set(10,20, averageFuelColumnTemp)
+    averageTable(boilerTemp, averageBoilerTemp)
+    gpu.set(10,30, averageBoilerTemp)
+    
 end
