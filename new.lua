@@ -53,7 +53,7 @@ local averageBoilerSteam = 0
 
 -- functions
 
-function averageTable(tableIN, averageOUT)
+local function averageTable(tableIN, averageOUT)
     local sum = 0
     for i, v in ipairs(tableIN) do
         sum = sum + v
@@ -62,7 +62,7 @@ function averageTable(tableIN, averageOUT)
     return averageOUT
 end
 
-function averageDouble(tableIN,averageOUT)
+local function averageDouble(tableIN,averageOUT)
     local sum = 0
     for i, v in ipairs(tableIN) do
         sum = sum + v
