@@ -53,22 +53,23 @@ local averageBoilerSteam = 0
 
 -- functions
 
-function averageTable(tableIN)
+function averageTable(tableIN, averageOUT)
     local sum = 0
     for i, v in ipairs(tableIN) do
         sum = sum + v
     end
-    local average = sum / #tableIN
-    return average
+    local averageOUT = sum / #tableIN
+    return averageOUT
 end
 
-function averageDouble(tableIN)
+function averageDouble(tableIN,averageOUT)
     local sum = 0
     for i, v in ipairs(tableIN) do
         sum = sum + v
     end
     local average = sum / #tableIN
-    average = average * 100
+    averageOUT = average * 100
+    return averageOUT
 end
 
 
@@ -84,7 +85,7 @@ for x=0,15 do
             table.insert(controlRodColumns, {x = x, y = y})
         elseif data.type == "FUEL" then
             table.insert(fuelRodColumns, {x = x, y = y})
-        elseif data.type = "BOILER" then
+        elseif data.type == "BOILER" then
             table.insert(boilerColumns, {x = x, y = y})
         else
 
@@ -119,10 +120,9 @@ while true do
         table.insert(boilerTemp, data.hullTemp)
     end
 
-    AvfuelCoreTemp = averageTable(fuelCoreHeat)
-    AvfuelColumnTemp = averageTable(fuelColunmHeat)
-    AvfuelColumnTemp = averageTable(fuelColunmHeat)
-    AvBoilerColunmTemp = averageTable(boilersHeat)
+    averageTable(fuelRodCoreTemp, AvfuelCoreTemp)
+    averageTable(fuelColunmHeat, AvfuelColumnTemp)
+    averageTable(boilersHeat)
 
     gpu.set(10,10, AvfuelCoreTemp) 
     gpu.set(20,20, AvfuelColumnTemp)
