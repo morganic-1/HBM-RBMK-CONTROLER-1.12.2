@@ -2,6 +2,14 @@
 local scriptPhase = ""
 local scriptVer = "0.0.1 - A"
 
+local component = require("component")  
+local event = require("event")
+local term = require("term")
+local os = require("os")
+local c = component
+local gpu = c.gpu
+local rbmk = c.rbmk_console
+
 -- Erroring functions
 local function Fatal_err(err)
     print(debug.traceback("FATAL ERROR: " .. err .. "DURING:" .. scriptPhase))
@@ -18,14 +26,6 @@ local function Warn_err(err)
 end
 
 scriptPhase = "pre-ini"
-
-local component = require("component")  
-local event = require("event")
-local term = require("term")
-local os = require("os")
-local c = component
-local gpu = c.gpu
-local rbmk = c.rbmk_console
 
 --ini
 scriptPhase = "ini"
@@ -55,7 +55,7 @@ local AvBoilerColunmTemp = 0
 local AvBoilerWaterAmount = 0
 local AvControlRodIns = 0
 
-function averageTable(tableIN)
+local function averageTable(tableIN)
     local sum = 0
     for i, v in ipairs(tableIN) do
         sum = sum + v
@@ -75,7 +75,7 @@ for x=0,15 do
             table.insert(controlRods, {x = x, y = y})
         elseif data.type == "FUEL" then
             table.insert(fuelRods, {x = x, y = y})
-        elseif data.type = "BOILER" then
+        elseif data.type == "BOILER" then
             table.insert(boilers, {x = x, y = y})
         else
 
