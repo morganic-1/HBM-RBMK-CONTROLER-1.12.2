@@ -29,10 +29,27 @@ local outlineColor = 0x00FF00
 
     local logMessages = {}
 
+    -- RBMK data
+
+    local foundRods = {} -- data should look like this {{x,y,type},{x,y,type}}
+    local globalHeat = {} -- data should look like this {{heat},{heat}}
+    local globalAvHeat = 0
+
+
 -- Functions
 
 
 local function updateLogBox(message, textColor)
+    local lines = {}
+    for i=1, #message, logBoxWidth do
+        table.insert(lines, message:sub(i, i+logBoxWidth-1))
+    end
+    for _, line in ipairs(lines) do
+        table.insert(logMessages, line)
+        if #logMessages > logBoxHeight then
+            table.remove(logMessages, 1)  -- Remove the oldest message
+        end
+    end
     -- Add the message to the logMessages array
     table.insert(logMessages, message)  
     if #logMessages > logBoxHeight then
@@ -52,30 +69,27 @@ local function updateLogBox(message, textColor)
     gpu.setForeground(0xFFFFFF)  -- Reset to default text color
 end
 
-local function averageTable(tableIN, averageOUT)
+local function averageTable(tableIN)
     local sum = 0
     for i, v in ipairs(tableIN) do
         sum = sum + v
     end
-    local averageOUT = sum / #tableIN
-    return averageOUT
+    return sum / #tableIN
 end
 
-local function averageDouble(tableIN,averageOUT)
+local function averageDouble(tableIN)
     local sum = 0
     for i, v in ipairs(tableIN) do
         sum = sum + v
     end
-    local average = sum / #tableIN
-    averageOUT = average * 100
-    return averageOUT
+    return (sum / #tableIN) * 100
 end
 
 -- Error handlers
 
 local function fatalError(err)
-    print(debug.traceback("FATAL ERROR: " .. err .. "DURING:" .. scriptPhase))
-    print(debug.traceback("CHECK LOG FOR MORE DETAIL"))
+    updateLogBox("FATAL ERROR: " .. err .. "DURING:" .. scriptPhase, #FF0000)
+    updateLogBox("CHECK LOG FOR MORE DETAIL")
     return nil
 end
 
@@ -90,6 +104,18 @@ end
 scriptPhase = "startup"
 
 
+-- find rbmk rods
+
+for x=0,15 do
+    for y=0,15 do
+        local data = rbmk.getColumnData(x,y)
+        if type(data) == "table" then
+            -- This means there's a rod at (x, y)
+            -- Now you can access the properties of the rod
+            table.insert(foundRods, {x, y, data.type})
+        end
+    end
+end
 
 gpu.fill(5, 10, 40, 5, " ")
 

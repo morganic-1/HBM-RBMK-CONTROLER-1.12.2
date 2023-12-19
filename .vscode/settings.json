@@ -1,6 +1,7 @@
 {
     "Lua.diagnostics.globals": [
-        "FFFF00"
+        "FFFF00",
+        "FF0000"
     ],
     "cSpell.enableFiletypes": [
         "lua"
