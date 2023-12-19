@@ -65,3 +65,7 @@ end
 
 gpu.fill(5, 10, 40, 5, " ")
 
+-- Main loop
+while true do
+    
+end
