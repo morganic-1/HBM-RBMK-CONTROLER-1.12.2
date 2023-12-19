@@ -1,4 +1,4 @@
--- Librares 
+-- Libraries 
 local component = require("component")
 local event = require("event")
 local term = require("term")
@@ -10,11 +10,11 @@ local rbmk = component.rbmk_console
 local rs = {} -- reserved for later
 local modem = {} -- reserved for later
 
--- Scriptwide variables
+-- Script-wide variables
 
 local scriptVer = "0.0.1 - A"
 local scriptPhase = ""
-local runingThreads = {}
+local runningThreads = {}
 local outlineColor = 0x00FF00
 
     -- Values
