@@ -1,3 +1,5 @@
+local scriptPhase = ""
+scriptPhase = "Startup"
 -- Libraries 
 local component = require("component")
 local event = require("event")
@@ -13,7 +15,6 @@ local modem = {} -- reserved for later
 -- Script-wide variables
 
 local scriptVer = "0.0.1 - A"
-local scriptPhase = ""
 local runningThreads = {}
 local outlineColor = 0x00FF00
 
@@ -30,7 +31,7 @@ local outlineColor = 0x00FF00
 
 -- Functions
 
--- Function to update the log box with a status message
+
 local function updateLogBox(message, textColor)
     -- Add the message to the logMessages array
     table.insert(logMessages, message)  
@@ -63,8 +64,17 @@ local function warnErr(err)
     updateLogBox("WARN: " .. err, #FFFF00)
 end
 
+
+-----------------------------------------------------------------------------------------------------------------
+
+-- Switch mode to startup
+scriptPhase = "startup"
+
+
+
 gpu.fill(5, 10, 40, 5, " ")
 
+-----------------------------------------------------------------------------------------------------------------
 -- Main loop
 while true do
     
