@@ -52,6 +52,25 @@ local function updateLogBox(message, textColor)
     gpu.setForeground(0xFFFFFF)  -- Reset to default text color
 end
 
+local function averageTable(tableIN, averageOUT)
+    local sum = 0
+    for i, v in ipairs(tableIN) do
+        sum = sum + v
+    end
+    local averageOUT = sum / #tableIN
+    return averageOUT
+end
+
+local function averageDouble(tableIN,averageOUT)
+    local sum = 0
+    for i, v in ipairs(tableIN) do
+        sum = sum + v
+    end
+    local average = sum / #tableIN
+    averageOUT = average * 100
+    return averageOUT
+end
+
 -- Error handlers
 
 local function fatalError(err)
